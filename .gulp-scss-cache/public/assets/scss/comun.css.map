@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,8EAA+E;EAC7E,OAAO,EAAE,eAAe",
+"sources": ["../../../../public/assets/scss/comun.scss"],
+"names": [],
+"file": "comun.css"
+}

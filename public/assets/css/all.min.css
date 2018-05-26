@@ -340,3 +340,5 @@ template {
     display: none !important;
 }
 /*# sourceMappingURL=bootstrap-reboot.css.map */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }

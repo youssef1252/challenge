@@ -1,0 +1,16 @@
+%br
+%br
+.col-md-6
+  %h2 Log in
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+    .form-group
+      = f.label :password
+      = f.password_field :password, autocomplete: "off", class: "form-control"
+    -#= f.submit %i.fas.fa-sign-in-alt "Log in", class: "btn btn-primary"
+    = button_tag(type: "submit", class: "btn btn-primary") do
+      %span
+        %i.fas.fa-sign-in-alt
+        Send
