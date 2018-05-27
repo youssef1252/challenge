@@ -6,11 +6,20 @@ home.controller 'homeController', ($scope, products_data) ->
     $scope.products = results
 
 #  after click on liked button
-  $scope.action = (product, type) ->
+  $scope.liked = (product, type) ->
     products_data.update_products(product.id, type).then (results) ->
-      console.log results
       if results.response == 'success Response'
-        if type == 'like'
-          product.like = true
-        else
-          product.like = false
+        product.like = true
+
+home.controller 'favoriteController', ($scope, products_data) ->
+  $scope.products_favorite = []
+
+  #  get all favorites products from service 'products_data'
+  products_data.favorite_products().then (results) ->
+    $scope.products_favorite = results
+
+  #  after click on liked button
+  $scope.remove = (product, type) ->
+    products_data.update_products(product.id, type).then (results) ->
+      if results.response == 'success Response'
+        product.like = false

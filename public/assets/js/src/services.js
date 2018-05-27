@@ -12,6 +12,11 @@ home.factory('products_data', [
         return result.data;
       });
     };
+    factory.favorite_products = function(id, type) {
+      return $http.get('/products/favorites').then(function(result) {
+        return result.data;
+      });
+    };
     return factory;
   }
 ]);

@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :get_products]
 
+  # Route: '/'
   def index
+
   end
 
   # Display all products into index page
@@ -34,9 +36,9 @@ class HomeController < ApplicationController
     render json: data
   end
 
-  # after cliked on like button
+  # After cliked on like button
   # used by service 'products_data'
-  # Route: 'products/update/:id/:type'
+  # Route: '/products/update/:id/:type'
   # format json
   def update_products
     if request.params[:id].blank? || request.params[:type].blank?
@@ -60,6 +62,33 @@ class HomeController < ApplicationController
     end
     render json: {"response" => "success Response"}
     return
+  end
+
+  # Route: '/favorites'
+  def favorites
+
+  end
+
+  # Display all favorites products into preferred shops page
+  # used by service 'products_data'
+  # Route: '/products/favorites'
+  # format json
+  def favorite_products
+    data = []
+    favorites = Favorite.where(user_id: current_user.id)
+    favorites.each do |f|
+      p = Product.find_by_id(f.product_id)
+      data.push({
+        id: p.id,
+        name: p.libelle,
+        price: p.price,
+        latitude: p.latitude,
+        longitude: p.longitude,
+        like: true,
+        created: p.created_at
+      })
+    end
+    render json: data
   end
 
 end

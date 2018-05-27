@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   end
   get 'products', to: 'home#get_products'
   get 'products/update/:id/:type', to: 'home#update_products'
+  get 'products/favorites', to: 'home#favorite_products'
+  get 'favorites', to: 'home#favorites'
 end

@@ -8,6 +8,6 @@
           %span(ng-bind="product.price")
           DH
         - if user_signed_in?
-          %a.btn.btn-primary(href="#" ng-click="action(product, 'like')")
+          %a.btn.btn-primary(href="#" ng-click="liked(product, 'like')")
             %i.fas.fa-thumbs-up
             Like
