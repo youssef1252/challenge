@@ -7,6 +7,11 @@ home.factory('products_data', [
         return result.data;
       });
     };
+    factory.update_products = function(id, type) {
+      return $http.get('/products/update/' + id + '/' + type).then(function(result) {
+        return result.data;
+      });
+    };
     return factory;
   }
 ]);

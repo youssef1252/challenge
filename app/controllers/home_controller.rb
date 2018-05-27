@@ -34,4 +34,32 @@ class HomeController < ApplicationController
     render json: data
   end
 
+  # after cliked on like button
+  # used by service 'products_data'
+  # Route: 'products/update/:id/:type'
+  # format json
+  def update_products
+    if request.params[:id].blank? || request.params[:type].blank?
+      render json: {"response" => "Bad Response"}
+      return
+    end
+
+    if request.params[:type] == 'like'
+      begin
+        Favorite.create!([user_id: current_user.id, product_id: request.params[:id]])
+      rescue => e
+        render json: {"response" => "Bad Response"}
+        ap "An error occured: #{e}"
+        return
+      end
+    end
+
+    if request.params[:type] == 'dislike'
+      favorite = Favorite.find_by_user_id_and_product_id(current_user.id, request.params[:id])
+      favorite.destroy
+    end
+    render json: {"response" => "success Response"}
+    return
+  end
+
 end
