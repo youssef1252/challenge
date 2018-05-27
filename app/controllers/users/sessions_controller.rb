@@ -23,7 +23,7 @@ class Users::SessionsController < Devise::SessionsController
 
       if user.valid_password?(params[:user][:password])
         sign_in user
-        flash[:alert] = "Sign in succeful"
+        flash[:alert] = "Signed in successfully."
         redirect_url = '/'
         redirect_to redirect_url
       else
