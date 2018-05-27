@@ -10,7 +10,7 @@ home.factory('products_data', ['$http', ($http) ->
     $http.get('/products/update/'+id+'/'+type).then (result) ->
       return result.data
 
-  factory.favorite_products = (id, type) ->
+  factory.favorite_products = () ->
     $http.get('/products/favorites').then (result) ->
       return result.data
 

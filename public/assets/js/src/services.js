@@ -12,7 +12,7 @@ home.factory('products_data', [
         return result.data;
       });
     };
-    factory.favorite_products = function(id, type) {
+    factory.favorite_products = function() {
       return $http.get('/products/favorites').then(function(result) {
         return result.data;
       });

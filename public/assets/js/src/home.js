@@ -3,8 +3,16 @@ home.controller('homeController', function($scope, products_data) {
   products_data.get_products().then(function(results) {
     return $scope.products = results;
   });
-  return $scope.liked = function(product, type) {
+  $scope.liked = function(product, type) {
     return products_data.update_products(product.id, type).then(function(results) {
+      if (results.response === 'success Response') {
+        return product.like = true;
+      }
+    });
+  };
+  return $scope.disliked = function(product, type) {
+    return products_data.update_products(product.id, type).then(function(results) {
+      console.log(results);
       if (results.response === 'success Response') {
         return product.like = true;
       }

@@ -11,6 +11,13 @@ home.controller 'homeController', ($scope, products_data) ->
       if results.response == 'success Response'
         product.like = true
 
+#  after click on disliked button
+  $scope.disliked = (product, type) ->
+    products_data.update_products(product.id, type).then (results) ->
+      console.log results
+      if results.response == 'success Response'
+        product.like = true
+
 home.controller 'favoriteController', ($scope, products_data) ->
   $scope.products_favorite = []
 

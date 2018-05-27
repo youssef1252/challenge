@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   # Route: '/'
   def index
-
+    ap 2.hours.from_now.strftime("%Y-%m-%d %H:%M:%S")
   end
 
   # Display all products into index page
@@ -19,6 +19,10 @@ class HomeController < ApplicationController
       if current_user
         favorite = Favorite.find_by_user_id_and_product_id(current_user.id, p.id)
         if favorite
+          liked = true
+        end
+        display = Visbility.find_by_user_id_and_product_id(current_user.id, p.id)
+        if (display) && (Time.now.to_i < display.date_display.to_i)
           liked = true
         end
       end
@@ -57,6 +61,17 @@ class HomeController < ApplicationController
     end
 
     if request.params[:type] == 'dislike'
+      begin
+        date_display = 2.hours.from_now.strftime("%Y-%m-%d %H:%M:%S")
+        Visbility.create!([user_id: current_user.id, product_id: request.params[:id], date_display: date_display])
+      rescue => e
+        render json: {"response" => "Bad Response"}
+        ap "An error occured: #{e}"
+        return
+      end
+    end
+
+    if request.params[:type] == 'remove'
       favorite = Favorite.find_by_user_id_and_product_id(current_user.id, request.params[:id])
       favorite.destroy
     end
