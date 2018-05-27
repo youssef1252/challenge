@@ -1,4 +1,4 @@
-# Project Title
+# Coding Challenge Guidelines
 
 This application give you a list of shops, you can like or dislike shop
 
